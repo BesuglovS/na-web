@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Проекты Академии Наяновой</title>
+    <meta name="description" content="Все образовательные проекты Академии Наяновой: подготовка к ОГЭ, ЕГЭ, ВПР, изучение Python, офисных приложений, истории, программирования и многое другое." />
+    <meta property="og:title" content="Проекты Академии Наяновой" />
+    <meta property="og:description" content="Все образовательные проекты Академии Наяновой в одном месте." />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-wrapper {
+            display: inline-block;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .logo-wrapper img {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #9e9e9e;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Project Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+        }
+
+        .card-title-area {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .card-domain {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-live {
+            background: rgba(56, 239, 125, 0.15);
+            color: #38ef7d;
+        }
+
+        .badge-wip {
+            background: rgba(255, 193, 7, 0.15);
+            color: #ffc107;
+        }
+
+        .card-domain {
+            color: #667eea;
+            font-size: 0.8rem;
+            word-break: break-all;
+        }
+
+        .card-description {
+            font-size: 0.92rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .card-footer {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .card-footer .arrow {
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover .card-footer .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Card color themes */
+        .project-card.theme-purple::before {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        .project-card.theme-green::before {
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+        }
+        .project-card.theme-orange::before {
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+        }
+        .project-card.theme-blue::before {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+        }
+        .project-card.theme-yellow::before {
+            background: linear-gradient(90deg, #feca57, #ff9f43);
+        }
+        .project-card.theme-teal::before {
+            background: linear-gradient(90deg, #84fab0, #8fd3f4);
+        }
+        .project-card.theme-red::before {
+            background: linear-gradient(90deg, #ff9a9e, #fecfef);
+        }
+        .project-card.theme-pink::before {
+            background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+        }
+        .project-card.theme-gray::before {
+            background: linear-gradient(90deg, #6c757d, #adb5bd);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .logo-wrapper img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .card-icon {
+                font-size: 1.8rem;
+                width: 42px;
+                height: 42px;
+            }
+
+            .card-title {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Section title */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-wrapper">
+                <img src="NULogo.png" alt="Логотип Академии Наяновой" />
+            </div>
+            <h1>Проекты Академии Наяновой</h1>
+            <p>
+                Образовательные онлайн-проекты для подготовки к экзаменам,
+                изучения программирования и развития digital-навыков
+            </p>
+        </header>
+
+        <div class="projects-grid">
+            <!-- Python -->
+            <a href="http://python.nayanovaacademy.ru" class="project-card theme-purple">
+                <div class="card-header">
+                    <div class="card-icon">🐍</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            Основы Python
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">python.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    34 интерактивных урока по программированию на Python для начинающих:
+                    от переменных до объектно-ориентированного программирования.
+                    С интерактивной консолью и отслеживанием прогресса.
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- ОГЭ -->
+            <a href="http://oge.nayanovaacademy.ru" class="project-card theme-green">
+                <div class="card-header">
+                    <div class="card-icon">🎓</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            ОГЭ — Информатика
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">oge.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Интерактивные задания для подготовки к Основному государственному
+                    экзамену по информатике. 16 типов заданий с теорией и автоматической
+                    проверкой.
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- ВПР -->
+            <a href="http://vpr.nayanovaacademy.ru" class="project-card theme-blue">
+                <div class="card-header">
+                    <div class="card-icon">📘</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            ВПР — Информатика
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">vpr.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Подготовка к Всероссийской проверочной работе по информатике
+                    для 7 и 8 классов. 12 типов заданий для 7 класса и 10 — для 8 класса.
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- Офисные приложения -->
+            <a href="http://office.nayanovaacademy.ru" class="project-card theme-yellow">
+                <div class="card-header">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            Офисные приложения
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">office.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Учебные материалы по Microsoft Office и LibreOffice: текстовые
+                    редакторы (Word), электронные таблицы (Excel), редакторы
+                    презентаций (PowerPoint).
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- История -->
+            <a href="http://history.nayanovaacademy.ru" class="project-card theme-orange">
+                <div class="card-header">
+                    <div class="card-icon">🏛️</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            История России
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">history.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Тестирование по истории России с выбором тем, режимами
+                    практики и экзамена. Проверьте свои знания по разным
+                    историческим периодам.
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- Контесты -->
+            <a href="http://contest.nayanovaacademy.ru" class="project-card theme-teal">
+                <div class="card-header">
+                    <div class="card-icon">🏆</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            Контесты
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">contest.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Платформа для олимпиад по программированию. Создание,
+                    проведение и проверка контестов с автоматическим
+                    тестированием решений.
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- Canvas / Выпуск 2026 -->
+            <a href="http://canvas.nayanovaacademy.ru" class="project-card theme-pink">
+                <div class="card-header">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            Канвас «Выпуск 2026»
+                            <span class="badge badge-live">Активен</span>
+                        </div>
+                        <div class="card-domain">canvas.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Совместный онлайн-холст для рисования выпускников 2026 года.
+                    Рисуйте вместе с друзьями в реальном времени, используйте
+                    кисти, текст, изображения.
+                </p>
+                <div class="card-footer">
+                    <span>Перейти к проекту</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- ЕГЭ -->
+            <a href="http://ege.nayanovaacademy.ru" class="project-card theme-gray" style="opacity: 0.6;">
+                <div class="card-header">
+                    <div class="card-icon">📝</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            ЕГЭ — Информатика
+                            <span class="badge badge-wip">В разработке</span>
+                        </div>
+                        <div class="card-domain">ege.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Материалы для подготовки к Единому государственному экзамену
+                    по информатике. Проект находится в стадии наполнения.
+                </p>
+                <div class="card-footer">
+                    <span>Следите за обновлениями</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- Информатика (пустой) -->
+            <a href="http://inf.nayanovaacademy.ru" class="project-card theme-gray" style="opacity: 0.6;">
+                <div class="card-header">
+                    <div class="card-icon">💻</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            Информатика
+                            <span class="badge badge-wip">В разработке</span>
+                        </div>
+                        <div class="card-domain">inf.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Проект находится в стадии разработки. Скоро здесь появятся
+                    полезные материалы по информатике.
+                </p>
+                <div class="card-footer">
+                    <span>Следите за обновлениями</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- КЕГЭ (пустой) -->
+            <a href="http://kege.nayanovaacademy.ru" class="project-card theme-gray" style="opacity: 0.6;">
+                <div class="card-header">
+                    <div class="card-icon">🔬</div>
+                    <div class="card-title-area">
+                        <div class="card-title">
+                            КЕГЭ
+                            <span class="badge badge-wip">В разработке</span>
+                        </div>
+                        <div class="card-domain">kege.nayanovaacademy.ru</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    Проект находится в стадии разработки. Скоро здесь появятся
+                    ответы к задачам с сайта kompege.ru.
+                </p>
+                <div class="card-footer">
+                    <span>Следите за обновлениями</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+        </div>
+
+        <footer>
+            <p>Copyright &copy; 2026 Академия Наяновой</p>
+            <p style="margin-top: 4px;">
+                Сделано с ❤️ для учеников и учителей
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
