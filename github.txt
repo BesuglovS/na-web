@@ -1,5 +1,5 @@
 https://github.com/BesuglovS/contest-web.git
-https://github.com/BesuglovS/history-web.git
+https://github.com/BesuglovS/inf-web.git
 https://github.com/BesuglovS/office-web.git
 https://github.com/BesuglovS/oge-web.git
 https://github.com/BesuglovS/python-web.git
