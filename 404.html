@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Страница не найдена | Академия Наяновой</title>
+    <meta name="description" content="Запрошенная страница не существует. Вернитесь на главную страницу проектов Академии Наяновой." />
+    <meta property="og:title" content="404 — Страница не найдена | Академия Наяновой" />
+    <meta property="og:description" content="Запрошенная страница не существует." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nayanovaacademy.ru/404.html" />
+    <meta property="og:image" content="https://nayanovaacademy.ru/NULogo.png" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="canonical" href="https://nayanovaacademy.ru/404.html" />
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .error-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 12px;
+        }
+        .error-message {
+            font-size: 1.05rem;
+            color: #9e9e9e;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .error-back {
+            display: inline-block;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .error-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+        }
+        .error-back:focus-visible {
+            outline: 3px solid #667eea;
+            outline-offset: 3px;
+        }
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            .error-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-wrapper">
+                <img src="NULogo.png" alt="Логотип Академии Наяновой" />
+            </div>
+        </header>
+        <div class="error-container">
+            <div class="error-code" aria-hidden="true">404</div>
+            <h1 class="error-title">Страница не найдена</h1>
+            <p class="error-message">
+                Возможно, вы ошиблись адресом или страница была перемещена.
+                Вы можете вернуться на главную и найти нужный проект там.
+            </p>
+            <a href="/" class="error-back">← Вернуться на главную</a>
+        </div>
+    </div>
+</body>
+</html>

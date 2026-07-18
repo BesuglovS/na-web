@@ -1,0 +1,102 @@
+[
+    {
+        "id": "python",
+        "title": "Основы Python",
+        "domain": "python.nayanovaacademy.ru",
+        "description": "34 интерактивных урока по программированию на Python для начинающих: от переменных до объектно-ориентированного программирования. С интерактивной консолью и отслеживанием прогресса.",
+        "status": "active",
+        "icon": "🐍",
+        "badge": "Активен",
+        "theme": "purple"
+    },
+    {
+        "id": "oge",
+        "title": "ОГЭ — Информатика",
+        "domain": "oge.nayanovaacademy.ru",
+        "description": "Интерактивные задания для подготовки к Основному государственному экзамену по информатике. 16 типов заданий с теорией и автоматической проверкой.",
+        "status": "active",
+        "icon": "🎓",
+        "badge": "Активен",
+        "theme": "green"
+    },
+    {
+        "id": "vpr",
+        "title": "ВПР — Информатика",
+        "domain": "vpr.nayanovaacademy.ru",
+        "description": "Подготовка к Всероссийской проверочной работе по информатике для 7 и 8 классов. 12 типов заданий для 7 класса и 10 — для 8 класса.",
+        "status": "active",
+        "icon": "📘",
+        "badge": "Активен",
+        "theme": "blue"
+    },
+    {
+        "id": "office",
+        "title": "Офисные приложения",
+        "domain": "office.nayanovaacademy.ru",
+        "description": "Учебные материалы по Microsoft Office и LibreOffice: текстовые редакторы (Word), электронные таблицы (Excel), редакторы презентаций (PowerPoint).",
+        "status": "active",
+        "icon": "📊",
+        "badge": "Активен",
+        "theme": "yellow"
+    },
+    {
+        "id": "history",
+        "title": "История России",
+        "domain": "history.nayanovaacademy.ru",
+        "description": "Тестирование по истории России с выбором тем, режимами практики и экзамена. Проверьте свои знания по разным историческим периодам.",
+        "status": "active",
+        "icon": "🏛️",
+        "badge": "Активен",
+        "theme": "orange"
+    },
+    {
+        "id": "contest",
+        "title": "Контесты",
+        "domain": "contest.nayanovaacademy.ru",
+        "description": "Платформа для олимпиад по программированию. Создание, проведение и проверка контестов с автоматическим тестированием решений.",
+        "status": "active",
+        "icon": "🏆",
+        "badge": "Активен",
+        "theme": "teal"
+    },
+    {
+        "id": "canvas",
+        "title": "Канвас «Выпуск 2026»",
+        "domain": "canvas.nayanovaacademy.ru",
+        "description": "Совместный онлайн-холст для рисования выпускников 2026 года. Рисуйте вместе с друзьями в реальном времени, используйте кисти, текст, изображения.",
+        "status": "active",
+        "icon": "🎨",
+        "badge": "Активен",
+        "theme": "pink"
+    },
+    {
+        "id": "ege",
+        "title": "ЕГЭ — Информатика",
+        "domain": "ege.nayanovaacademy.ru",
+        "description": "Материалы для подготовки к Единому государственному экзамену по информатике. Проект находится в стадии наполнения.",
+        "status": "wip",
+        "icon": "📝",
+        "badge": "В разработке",
+        "theme": "gray"
+    },
+    {
+        "id": "inf",
+        "title": "Информатика",
+        "domain": "inf.nayanovaacademy.ru",
+        "description": "Проект находится в стадии разработки. Скоро здесь появятся полезные материалы по информатике.",
+        "status": "wip",
+        "icon": "💻",
+        "badge": "В разработке",
+        "theme": "gray"
+    },
+    {
+        "id": "kege",
+        "title": "КЕГЭ",
+        "domain": "kege.nayanovaacademy.ru",
+        "description": "Проект находится в стадии разработки. Скоро здесь появятся ответы к задачам с сайта kompege.ru.",
+        "status": "wip",
+        "icon": "🔬",
+        "badge": "В разработке",
+        "theme": "gray"
+    }
+]

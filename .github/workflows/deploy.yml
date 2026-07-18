@@ -1,0 +1,47 @@
+name: Deploy na-web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Гарантирует только один деплой одновременно
+concurrency:
+  group: na-web-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating data/projects.json..."
+          cat data/projects.json | python3 -m json.tool > /dev/null && echo "OK" || (echo "INVALID JSON" && exit 1)
+          echo "Validating manifest.json..."
+          cat manifest.json | python3 -m json.tool > /dev/null && echo "OK" || (echo "INVALID JSON" && exit 1)
+
+      - name: Validate XML
+        run: |
+          echo "Validating sitemap.xml..."
+          python3 -c "import xml.etree.ElementTree as ET; ET.parse('sitemap.xml'); print('OK')"
+
+      - name: Validate robots.txt
+        run: |
+          echo "Checking robots.txt..."
+          test -f robots.txt && grep -q "Sitemap" robots.txt && echo "OK (Sitemap reference found)" || echo "WARNING: No Sitemap reference in robots.txt"
+
+      - name: Deploy via rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude='refactoring.md'
+          path: /github/workspace/
+          remote_path: ${{ secrets.REMOTE_PATH }}
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}

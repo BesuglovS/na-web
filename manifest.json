@@ -1,0 +1,17 @@
+{
+    "name": "Академия Наяновой — Проекты",
+    "short_name": "NA Academy",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#302b63",
+    "background_color": "#0f0c29",
+    "description": "Образовательные онлайн-проекты Академии Наяновой",
+    "lang": "ru",
+    "icons": [
+        {
+            "src": "NULogo.png",
+            "sizes": "200x200",
+            "type": "image/png"
+        }
+    ]
+}

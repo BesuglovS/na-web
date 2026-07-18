@@ -1,0 +1,559 @@
+/* ============================================================
+   na-web — Главная страница портала Академии Наяновой
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    min-height: 100vh;
+    color: #e0e0e0;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+}
+
+.logo-wrapper {
+    display: inline-block;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    padding: 8px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+}
+
+.logo-wrapper img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+header h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #9e9e9e;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   Controls (Search + Filter)
+   ============================================================ */
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.search-input:focus {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #b0b0b0;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #e0e0e0;
+}
+
+.filter-btn.active {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    color: #9e9e9e;
+    font-size: 1.05rem;
+    grid-column: 1 / -1;
+}
+
+.no-results.visible {
+    display: block;
+}
+
+/* ============================================================
+   Project Grid
+   ============================================================ */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card.active-card::before {
+    background: linear-gradient(90deg, #11998e, #38ef7d);
+    opacity: 1;
+}
+
+.project-card.wip-card::before {
+    background: linear-gradient(90deg, #feca57, #ff9f43);
+    opacity: 1;
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.card-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+}
+
+.card-title-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card-domain {
+    font-size: 0.8rem;
+    color: #667eea;
+    word-break: break-all;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-live {
+    background: rgba(56, 239, 125, 0.15);
+    color: #38ef7d;
+}
+
+.badge-wip {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+}
+
+.card-description {
+    font-size: 0.92rem;
+    color: #b0b0b0;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.card-footer {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.card-footer .arrow {
+    transition: transform 0.2s ease;
+}
+
+.project-card:hover .card-footer .arrow {
+    transform: translateX(4px);
+}
+
+/* ============================================================
+   Section title
+   ============================================================ */
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+footer a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   Theme Toggle Button
+   ============================================================ */
+
+.theme-toggle {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: scale(1.1);
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   Badge — Down (uptime check)
+   ============================================================ */
+
+.badge-down {
+    background: rgba(255, 82, 82, 0.15);
+    color: #ff5252;
+}
+
+/* ============================================================
+   Light Theme Overrides (manual toggle)
+   ============================================================ */
+
+[data-theme="light"] body {
+    background: linear-gradient(135deg, #e8ecf1 0%, #d5dce6 50%, #c8d0db 100%);
+    color: #2d2d2d;
+}
+
+[data-theme="light"] .project-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #2d2d2d;
+}
+
+[data-theme="light"] .project-card:hover {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .card-title {
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .card-description {
+    color: #555;
+}
+
+[data-theme="light"] .card-domain {
+    color: #4a5acb;
+}
+
+[data-theme="light"] .card-footer {
+    color: #4a5acb;
+}
+
+[data-theme="light"] .card-icon {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .search-input {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #2d2d2d;
+}
+
+[data-theme="light"] .search-input::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] .search-input:focus {
+    background: rgba(0, 0, 0, 0.07);
+    border-color: #4a5acb;
+}
+
+[data-theme="light"] .filter-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #555;
+}
+
+[data-theme="light"] .filter-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #2d2d2d;
+}
+
+[data-theme="light"] .filter-btn.active {
+    background: rgba(74, 90, 203, 0.12);
+    border-color: #4a5acb;
+    color: #4a5acb;
+}
+
+[data-theme="light"] .section-title {
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] footer {
+    color: #888;
+}
+
+[data-theme="light"] .no-results {
+    color: #777;
+}
+
+[data-theme="light"] .theme-toggle {
+    border-color: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Override auto dark mode when manual theme is set */
+[data-theme="light"] .project-card.active-card::before {
+    background: linear-gradient(90deg, #11998e, #38ef7d);
+}
+
+[data-theme="light"] .project-card.wip-card::before {
+    background: linear-gradient(90deg, #feca57, #ff9f43);
+}
+
+/* ============================================================
+   Header — make relative for toggle positioning
+   ============================================================ */
+
+header {
+    position: relative;
+}
+
+/* ============================================================
+   Focus-visible for all interactive elements
+   ============================================================ */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .logo-wrapper img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .card-icon {
+        font-size: 1.8rem;
+        width: 42px;
+        height: 42px;
+    }
+
+    .card-title {
+        font-size: 1.05rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-input {
+        min-width: 100%;
+    }
+
+    .filter-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}

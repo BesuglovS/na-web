@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вы офлайн | Академия Наяновой</title>
+    <meta name="description" content="Нет подключения к интернету. Вы можете просматривать ранее загруженные страницы." />
+    <meta property="og:title" content="Вы офлайн | Академия Наяновой" />
+    <meta property="og:description" content="Нет подключения к интернету." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="manifest" href="manifest.json" />
+    <style>
+        .offline-container {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .offline-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e0e0e0;
+            margin-bottom: 12px;
+        }
+        .offline-message {
+            font-size: 1.05rem;
+            color: #9e9e9e;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .offline-retry {
+            display: inline-block;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .offline-retry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+        }
+        .offline-retry:focus-visible {
+            outline: 3px solid #667eea;
+            outline-offset: 3px;
+        }
+        @media (max-width: 480px) {
+            .offline-icon {
+                font-size: 3.5rem;
+            }
+            .offline-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-wrapper">
+                <img src="NULogo.png" alt="Логотип Академии Наяновой" />
+            </div>
+        </header>
+        <div class="offline-container">
+            <span class="offline-icon" role="img" aria-label="Нет подключения">📡</span>
+            <h1 class="offline-title">Нет подключения к интернету</h1>
+            <p class="offline-message">
+                Проверьте ваше интернет-соединение. Ранее загруженные страницы
+                доступны для просмотра в автономном режиме.
+            </p>
+            <button class="offline-retry" onclick="location.reload()">🔄 Попробовать снова</button>
+        </div>
+    </div>
+</body>
+</html>
