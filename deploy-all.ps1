@@ -96,31 +96,31 @@ foreach ($project in $allProjects) {
   # git fetch
   Write-Host "  Fetching remote..." -ForegroundColor Gray
   if (-not $DryRun) {
-    Push-Location $dir
-    git fetch origin --quiet 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) {
+    $global:ProgressPreference = 'SilentlyContinue'
+    $prevEAP = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    & git -C $dir fetch origin --quiet 2>&1 | Out-Null
+    $fetchExit = $LASTEXITCODE
+    $ErrorActionPreference = $prevEAP
+    if ($fetchExit -ne 0) {
       Write-Host "  git fetch failed" -ForegroundColor Red
       $results += [PSCustomObject]@{ Project = $name; Status = 'ERROR'; Message = 'git fetch failed' }
-      Pop-Location
       continue
     }
-    Pop-Location
   }
 
   # Detect default branch (main or master)
-  Push-Location $dir
   $mainRef = $null
   $prevEAP = $ErrorActionPreference
   $ErrorActionPreference = 'Continue'
   foreach ($branch in @('main', 'master')) {
-    $out = & git rev-parse --verify "origin/$branch" 2>&1
+    $out = & git -C $dir rev-parse --verify "origin/$branch" 2>&1
     if ($LASTEXITCODE -eq 0) {
       $mainRef = $branch
       break
     }
   }
   $ErrorActionPreference = $prevEAP
-  Pop-Location
 
   if (-not $mainRef) {
     Write-Host "  Cannot detect default branch (main/master)" -ForegroundColor Red
@@ -129,10 +129,11 @@ foreach ($project in $allProjects) {
   }
 
   # Compare local and remote HEAD
-  Push-Location $dir
-  $localSha  = (git rev-parse HEAD 2>$null).Trim()
-  $remoteSha = (git rev-parse "origin/$mainRef" 2>$null).Trim()
-  Pop-Location
+  $prevEAP = $ErrorActionPreference
+  $ErrorActionPreference = 'Continue'
+  $localSha  = (& git -C $dir rev-parse HEAD 2>&1).Trim()
+  $remoteSha = (& git -C $dir rev-parse "origin/$mainRef" 2>&1).Trim()
+  $ErrorActionPreference = $prevEAP
 
   $needsDeploy = $false
   if ($Force) {
@@ -141,9 +142,10 @@ foreach ($project in $allProjects) {
   } elseif ($localSha -ne $remoteSha) {
     $needsDeploy = $true
     # Count how many commits behind
-    Push-Location $dir
-    $behindCount = (git rev-list HEAD..origin/$mainRef --count 2>$null).Trim()
-    Pop-Location
+    $prevEAP = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    $behindCount = (& git -C $dir rev-list HEAD..origin/$mainRef --count 2>&1).Trim()
+    $ErrorActionPreference = $prevEAP
     Write-Host "  Local is $behindCount commit(s) behind origin/$mainRef" -ForegroundColor Yellow
   } else {
     Write-Host "  Up to date (HEAD = $mainRef)" -ForegroundColor Green
@@ -160,21 +162,17 @@ foreach ($project in $allProjects) {
     if ($DryRun) {
       Write-Host "    [DryRun] git pull origin $mainRef" -ForegroundColor Yellow
     } else {
-      Push-Location $dir
-      git pull origin $mainRef 2>&1 | ForEach-Object {
-        if ($_ -match 'fatal|error') {
-          Write-Host "    $_" -ForegroundColor Red
-        } else {
-          Write-Host "    $_" -ForegroundColor DarkGray
-        }
-      }
-      if ($LASTEXITCODE -ne 0) {
-        Write-Host "  git pull failed" -ForegroundColor Red
+      $prevEAP = $ErrorActionPreference
+      $ErrorActionPreference = 'Continue'
+      $pullOutput = & git -C $dir pull origin $mainRef 2>&1 | Out-String
+      $pullExit = $LASTEXITCODE
+      $ErrorActionPreference = $prevEAP
+      if ($pullExit -ne 0) {
+        Write-Host "  git pull failed: $($pullOutput.Trim())" -ForegroundColor Red
         $results += [PSCustomObject]@{ Project = $name; Status = 'ERROR'; Message = 'git pull failed' }
-        Pop-Location
         continue
       }
-      Pop-Location
+      Write-Host "    OK" -ForegroundColor DarkGray
     }
   }
 
@@ -184,10 +182,8 @@ foreach ($project in $allProjects) {
     Write-Host "    [DryRun] .\deploy.ps1" -ForegroundColor Yellow
     $results += [PSCustomObject]@{ Project = $name; Status = 'DRY'; Message = 'Would deploy' }
   } else {
-    Push-Location $dir
-    & powershell -File deploy.ps1
+    & $deployScript
     $deployExit = $LASTEXITCODE
-    Pop-Location
 
     if ($deployExit -ne 0) {
       Write-Host "  Deploy failed (exit code: $deployExit)" -ForegroundColor Red
