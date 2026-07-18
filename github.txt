@@ -4,4 +4,3 @@ https://github.com/BesuglovS/office-web.git
 https://github.com/BesuglovS/oge-web.git
 https://github.com/BesuglovS/python-web.git
 https://github.com/BesuglovS/vpr7.git
-https://github.com/BesuglovS/na-web.git

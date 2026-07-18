@@ -1,7 +1,8 @@
-# PowerShell script to clone all repositories from github.txt into the current folder
-# following the server structure at 79.143.31.184
+# PowerShell script to clone all repositories from github.txt
+# Run this from na-web folder to clone sibling projects into parent directory
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$ParentDir = Split-Path -Parent $ScriptDir
 $GithubFile = Join-Path $ScriptDir "github.txt"
 
 if (-not (Test-Path $GithubFile)) {
@@ -12,7 +13,7 @@ if (-not (Test-Path $GithubFile)) {
 $RepoUrls = Get-Content $GithubFile
 
 Write-Host "=== Cloning repositories ===" -ForegroundColor Cyan
-Write-Host "Target folder: $ScriptDir" -ForegroundColor Gray
+Write-Host "Target folder: $ParentDir" -ForegroundColor Gray
 Write-Host ""
 
 foreach ($Url in $RepoUrls) {
@@ -22,7 +23,15 @@ foreach ($Url in $RepoUrls) {
     }
 
     $RepoName = [System.IO.Path]::GetFileNameWithoutExtension($Url)
-    $TargetDir = Join-Path $ScriptDir $RepoName
+
+    if ($RepoName -eq "na-web") {
+        Write-Host "Repository: $RepoName" -ForegroundColor Yellow
+        Write-Host "  Skipped (current repo)" -ForegroundColor DarkGray
+        Write-Host ""
+        continue
+    }
+
+    $TargetDir = Join-Path $ParentDir $RepoName
 
     Write-Host "Repository: $RepoName" -ForegroundColor Yellow
 
@@ -56,7 +65,7 @@ Write-Host "=== Done! ===" -ForegroundColor Cyan
 # Show folder structure
 Write-Host ""
 Write-Host "Local folders with git repos:" -ForegroundColor Cyan
-Get-ChildItem $ScriptDir -Directory | Where-Object {
+Get-ChildItem $ParentDir -Directory | Where-Object {
     Test-Path (Join-Path $_.FullName ".git")
 } | ForEach-Object {
     Write-Host "  $($_.Name)" -ForegroundColor White
