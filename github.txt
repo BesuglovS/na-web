@@ -1,3 +1,4 @@
+https://github.com/BesuglovS/auth-web.git
 https://github.com/BesuglovS/contest-web.git
 https://github.com/BesuglovS/inf-web.git
 https://github.com/BesuglovS/office-web.git
