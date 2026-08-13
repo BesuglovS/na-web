@@ -11,6 +11,7 @@
     <meta property="og:url" content="https://nayanovaacademy.ru/" />
     <meta property="og:image" content="https://nayanovaacademy.ru/NULogo.png" />
     <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/design-tokens.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="manifest" href="manifest.json" />
@@ -26,6 +27,8 @@
         "description": "Образовательные онлайн-проекты для подготовки к экзаменам, изучения программирования и развития digital-навыков",
         "sameAs": [
             "https://python.nayanovaacademy.ru",
+            "https://ai.nayanovaacademy.ru",
+            "https://j.nayanovaacademy.ru",
             "https://oge.nayanovaacademy.ru",
             "https://vpr.nayanovaacademy.ru",
             "https://office.nayanovaacademy.ru",
@@ -52,6 +55,8 @@
             </p>
             <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему" title="Светлая / Тёмная тема">🌓</button>
         </header>
+
+        <section id="progress-card" class="progress-card" aria-label="Мой прогресс"></section>
 
         <div class="controls" role="search" aria-label="Поиск и фильтрация проектов">
             <input
@@ -80,6 +85,8 @@
         </footer>
     </div>
 
+    <script src="js/progress-client.js"></script>
+    <script src="js/progress-summary.js"></script>
     <script src="js/script.js"></script>
     <script src="js/uptime.js"></script>
     <!-- Yandex Metrika -->
