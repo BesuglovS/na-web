@@ -63,6 +63,24 @@ Write-Host "Projects folder: $ParentDir" -ForegroundColor Gray
 Write-Host "Projects to check: $($allProjects.Count)" -ForegroundColor Gray
 Write-Host ""
 
+# ─── 2a. Sync shared ecosystem components (na-web/shared → projects) ───
+$syncScript = Join-Path $ScriptDir 'shared\sync.ps1'
+if (Test-Path $syncScript) {
+  Write-Host "=== Syncing shared components ===" -ForegroundColor Cyan
+  if ($DryRun) {
+    Write-Host "  [DryRun] .\shared\sync.ps1" -ForegroundColor Yellow
+  } else {
+    & $syncScript
+    if ($LASTEXITCODE -ne 0) {
+      Write-Host "  Sync failed (exit code: $LASTEXITCODE)" -ForegroundColor Red
+    }
+  }
+  Write-Host ""
+} else {
+  Write-Host "SKIP: shared\sync.ps1 not found" -ForegroundColor DarkGray
+  Write-Host ""
+}
+
 # ─── 3. Process each project ───
 $results = @()
 

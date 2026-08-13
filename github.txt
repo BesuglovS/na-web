@@ -2,6 +2,7 @@ https://github.com/BesuglovS/ai-web.git
 https://github.com/BesuglovS/auth-web.git
 https://github.com/BesuglovS/contest-web.git
 https://github.com/BesuglovS/inf-web.git
+https://github.com/BesuglovS/j-web.git
 https://github.com/BesuglovS/office-web.git
 https://github.com/BesuglovS/oge-web.git
 https://github.com/BesuglovS/python-web.git
