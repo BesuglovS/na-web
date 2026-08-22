@@ -41,6 +41,14 @@ $map = @{
     (Join-Path $root 'vpr7\js\progress-client.js'),
     (Join-Path $root 'na-web\js\progress-client.js')
   )
+  (Join-Path $root 'auth-web\assets\js\tracking-client.js') = @(
+    (Join-Path $root 'oge-web\js\tracking-client.js'),
+    (Join-Path $root 'office-web\assets\js\tracking-client.js'),
+    (Join-Path $root 'inf-web\js\tracking-client.js'),
+    (Join-Path $root 'vpr7\js\tracking-client.js'),
+    (Join-Path $root 'na-web\js\tracking-client.js'),
+    (Join-Path $root 'j-web\assets-src\public\tracking-client.js')
+  )
   (Join-Path $shared 'js\progress-sync\oge.js') = @(
     (Join-Path $root 'oge-web\js\progress-sync.js')
   )
