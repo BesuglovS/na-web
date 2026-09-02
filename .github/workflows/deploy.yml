@@ -39,7 +39,7 @@ jobs:
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
-          switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude='refactoring.md'
+          switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude='refactoring.md' --exclude='.env' --exclude='shared/check-sync.ps1'
           path: /github/workspace/
           remote_path: ${{ secrets.REMOTE_PATH }}
           remote_host: ${{ secrets.SSH_HOST }}

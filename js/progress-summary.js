@@ -58,6 +58,14 @@
         return div;
     }
 
+    function buildUnavailable() {
+        var div = document.createElement('div');
+        div.className = 'progress-empty';
+        div.innerHTML =
+            '<p class="progress-empty-text">Сервис авторизации временно недоступен. Обновите страницу позже — прогресс никуда не денется.</p>';
+        return div;
+    }
+
     function buildNoData() {
         var div = document.createElement('div');
         div.className = 'progress-empty';
@@ -96,7 +104,10 @@
         card.classList.add('ready');
 
         if (data === null) {
-            card.appendChild(buildLoginPrompt());
+            var state = window.NayanovaProgress && typeof NayanovaProgress.getAuthState === 'function'
+                ? NayanovaProgress.getAuthState()
+                : { authed: false, unavailable: false };
+            card.appendChild(state.unavailable ? buildUnavailable() : buildLoginPrompt());
             return;
         }
 
