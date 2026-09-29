@@ -104,7 +104,7 @@ if ($DryRun) {
 } elseif (Test-Path $nginxLocal) {
   Write-Host "`n==> Deploying nginx config ($nginxSite) ..." -ForegroundColor Cyan
   $scpCmd = "scp $portArg $identityArg `"$nginxLocal`" ${remote}:/tmp/nginx-$nginxSite"
-  $sshNginxCmd = "ssh $portArg $identityArg $remote `"cp /tmp/nginx-$nginxSite $nginxRemote && nginx -t && systemctl reload nginx && rm -f /tmp/nginx-$nginxSite`""
+  $sshNginxCmd = "ssh $portArg $identityArg $remote `"sudo -n /usr/local/sbin/deploy-nginx.sh $nginxSite`""
   cmd /c $scpCmd
   if ($LASTEXITCODE -ne 0) { Write-Host "  Nginx config scp failed" -ForegroundColor Red; exit 1 }
   cmd /c $sshNginxCmd
