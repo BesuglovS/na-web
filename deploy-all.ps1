@@ -194,6 +194,20 @@ foreach ($project in $allProjects) {
     }
   }
 
+  # Skip deploy if production already serves the same content as the local tree.
+  if (-not $Force) {
+    $checkScript = Join-Path $ScriptDir 'check-deploy.ps1'
+    if ((Test-Path $checkScript) -and (Test-Path (Join-Path $dir '.env'))) {
+      $prodState = $null
+      try { $prodState = @(& $checkScript -Projects $name -Quiet -PassThru 2>$null) | Where-Object { $_.Project -eq $name } | Select-Object -First 1 } catch { }
+      if ($prodState -and $prodState.Status -eq 'MATCH') {
+        Write-Host "  Production already matches local tree - skip deploy" -ForegroundColor Green
+        $results += [PSCustomObject]@{ Project = $name; Status = 'OK'; Message = 'Prod up to date' }
+        continue
+      }
+    }
+  }
+
   # Deploy
   Write-Host "  Deploying..." -ForegroundColor Cyan
   if ($DryRun) {
