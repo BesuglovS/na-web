@@ -86,7 +86,6 @@ static `immutable 30d`, `no-cache` для `/sw.js` и `/js/tracking-client.js`, 
 
 - **Деплой без root (сентябрь 2026):** `.env` → `DEPLOY_SSH_USER=deploy` (ключ `../ssh-deploy.key`);
   webroot deploy:www-data; nginx-конфиг ставится через `sudo -n /usr/local/sbin/deploy-nginx.sh`.
-  В GitHub-секретах CI (`SSH_HOST`/`SSH_USER`/`SSH_PRIVATE_KEY`) — deploy-пользователь и новый ключ.
 
 - `G:\WebSites\na\ssh-private.key` — незашифрованный SSH-ключ вне репозиториев: никогда не читать, не печатать, не коммитить.
 - `.env` не печатать; при изменении помнить про exclude-список `deploy.ps1`.

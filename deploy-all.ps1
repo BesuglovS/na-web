@@ -60,7 +60,7 @@ if ($Projects) {
 $modeLabel = if ($DryRun) { ' [DRY RUN]' } elseif ($Force) { ' [FORCE]' } else { '' }
 Write-Host "`n=== Deploy All Projects${modeLabel} ===" -ForegroundColor Cyan
 Write-Host "Projects folder: $ParentDir" -ForegroundColor Gray
-Write-Host "Projects to check: $($allProjects.Count)" -ForegroundColor Gray
+Write-Host "Projects to check: $(@($allProjects).Count)" -ForegroundColor Gray
 Write-Host ""
 
 # ─── 2a. Sync shared ecosystem components (na-web/shared → projects) ───
@@ -249,9 +249,9 @@ foreach ($r in $results) {
   Write-Host "$($r.Project) - $($r.Message)"
 }
 
-$deployed = ($results | Where-Object { $_.Status -eq 'DEPLOYED' }).Count
-$failed   = ($results | Where-Object { $_.Status -eq 'ERROR' }).Count
-$skipped  = ($results | Where-Object { $_.Status -eq 'OK' }).Count
+$deployed = @($results | Where-Object { $_.Status -eq 'DEPLOYED' }).Count
+$failed   = @($results | Where-Object { $_.Status -eq 'ERROR' }).Count
+$skipped  = @($results | Where-Object { $_.Status -eq 'OK' }).Count
 
 Write-Host ""
 Write-Host "Deployed: $deployed  |  Up to date: $skipped  |  Errors: $failed" -ForegroundColor Cyan
